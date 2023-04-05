@@ -2,12 +2,12 @@ import React from "react";
 
 import useAppContext from "../store/AppContext.js";
 
-const Modal = (props) => {
+const ModalUpdate = (props) => {
 
     const {store, actions} = useAppContext();
 
   return (
-    <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
@@ -20,7 +20,7 @@ const Modal = (props) => {
             ></button>
           </div>
           <div className="modal-body">
-            <p>If you delete this thing the entire universe will go down!</p>
+            <p>You will update this Contact!</p>
           </div>
           <div className="modal-footer">
             <button
@@ -30,7 +30,7 @@ const Modal = (props) => {
             >
               Oh no!
             </button>
-            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => actions.handleClickDeleteContact(props.index)}>
+            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => actions.handleClickUpdate(props.id)}>
               Yes baby!
             </button>
           </div>
@@ -40,4 +40,4 @@ const Modal = (props) => {
   );
 };
 
-export default Modal;
+export default ModalUpdate;

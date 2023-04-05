@@ -7,6 +7,7 @@ import Modal from "./Modal.jsx";
 
 const TarjetaContacto = (props) => {
 
+
   return (
     <li className="list-group-item">
       <div className="card mb-3">
@@ -37,7 +38,7 @@ const TarjetaContacto = (props) => {
           </div>
           <div className="col-md-1">
             <p className="card-icon">
-              <Link to="/formulario">
+              <Link to={"/update/" + props.id}>
                 <i className="fa-solid fa-pencil"></i>
               </Link>
             </p>
@@ -45,7 +46,7 @@ const TarjetaContacto = (props) => {
           <div className="col-md-1">
             <div className="card-icon">
               <i className="fa-solid fa-trash-can" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-              <Modal index={props.index}/>
+              <Modal index={props.index} />
             </div>
           </div>
         </div>

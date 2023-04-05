@@ -11,7 +11,7 @@ const Contacto = () => {
 
   return (
     <ul className="list-group">
-        {store.contactList.map((item,index) => <TarjetaContacto item={item} key={index} index={index}/>)}
+        {store.contactList.map((item,index) => <TarjetaContacto item={item} key={index} id={item.id} index={index} />)}
     </ul>
   );
 };

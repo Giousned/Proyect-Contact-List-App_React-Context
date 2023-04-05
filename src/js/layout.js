@@ -4,6 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./views/home";
 import { Formulario } from "./views/formulario";
+import { Update } from "./views/update";
 
 import { Footer } from "./component/footer";
 
@@ -20,6 +21,7 @@ const Layout = () => {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/formulario" element={<Formulario />} />
+						<Route path="/update/:theid" element={<Update />} />
 						{/* <Route path="/single/:theid" element={<Single />} /> */}
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
