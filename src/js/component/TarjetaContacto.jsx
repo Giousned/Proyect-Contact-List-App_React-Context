@@ -45,8 +45,8 @@ const TarjetaContacto = (props) => {
           </div>
           <div className="col-md-1">
             <div className="card-icon">
-              <i className="fa-solid fa-trash-can" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-              <Modal index={props.index} />
+              <i className="fa-solid fa-trash-can" data-bs-toggle="modal" data-bs-target={`#modal-${props.id}`}></i>
+              <Modal id={props.id} />
             </div>
           </div>
         </div>

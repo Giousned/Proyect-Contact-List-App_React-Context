@@ -1,13 +1,17 @@
 import React from "react";
 
+import { useNavigate } from "react-router";
+
 import useAppContext from "../store/AppContext.js";
 
 const ModalUpdate = (props) => {
 
-    const {store, actions} = useAppContext();
+  const {store, actions} = useAppContext();
+
+  const navigate = useNavigate();
 
   return (
-    <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div className="modal fade" id={`updateModal-${props.id}`} tabIndex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
@@ -30,7 +34,7 @@ const ModalUpdate = (props) => {
             >
               Oh no!
             </button>
-            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => actions.handleClickUpdate(props.id)}>
+            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={(e) => {actions.handleClickUpdate(e, props.objContact, props.id); navigate("/")}}>
               Yes baby!
             </button>
           </div>

@@ -4,10 +4,11 @@ import useAppContext from "../store/AppContext.js";
 
 const Modal = (props) => {
 
-    const {store, actions} = useAppContext();
+  const {store, actions} = useAppContext();
+
 
   return (
-    <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div className="modal fade" id={`modal-${props.id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
@@ -30,7 +31,7 @@ const Modal = (props) => {
             >
               Oh no!
             </button>
-            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => actions.handleClickDeleteContact(props.index)}>
+            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => actions.handleClickDeleteContact(props.id)}>
               Yes baby!
             </button>
           </div>

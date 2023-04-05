@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import useAppContext from "../store/AppContext.js";
 
-const Button = (props) => {
+const Button = () => {
   
   const {store, actions} = useAppContext();
 

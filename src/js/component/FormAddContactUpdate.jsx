@@ -1,8 +1,8 @@
 import React from "react";
 
-import { Link, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
-import { useNavigate } from "react-router";
+import { Link, useParams } from "react-router-dom";
 
 import { GET_ContactList } from "../store/services.js";
 
@@ -12,19 +12,23 @@ import ModalUpdate from "./ModalUpdate.jsx";
 
 
 
-const FormAddContactUpdate = (props) => {
-
-  const navigate = useNavigate();
+const FormAddContactUpdate = () => {
+  
+  const {store, actions} = useAppContext();
+  
   const params = useParams();
 
-  const arrayPrint = GET_ContactList(params.theid);
 
-  console.log(arrayPrint);
-
-  // if (arrayPrint.full_name != "undefined") {console.log(arrayPrint.full_name);}
+  useEffect(() => {
+    GET_ContactList(params.theid)
+      .then(data => {
+        actions.setName(data.full_name)
+        actions.setEmail(data.email)
+        actions.setPhone(data.phone)
+        actions.setAddress(data.address)
+      })
+    },[]) 
   
-
-  const {store, actions} = useAppContext();
 
   return (
     <form>
@@ -37,7 +41,7 @@ const FormAddContactUpdate = (props) => {
           type="text"
           className="form-control"
           id="exampleInputFullName"
-          placeholder={arrayPrint.full_name != "undefined" ? arrayPrint["full_name"] : "Full name"}
+          placeholder="Full name"
           value={store.name}
           onChange={(e) => actions.setName(e.target.value)}
         />
@@ -82,10 +86,10 @@ const FormAddContactUpdate = (props) => {
         />
       </div>
       <div className="d-grid">
-        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#updateModal-${params.theid}`}>
           Save
         </button>
-        <ModalUpdate />
+        <ModalUpdate objContact={{name: store.name, email: store.email, phone: store.phone, address: store.address}} id={params.theid} />
         <span>
           <Link to="/">Or get back to contacts</Link>
         </span>
@@ -95,6 +99,3 @@ const FormAddContactUpdate = (props) => {
 };
 
 export default FormAddContactUpdate;
-
-
-// onClick={(e) => {actions.handleClickSave(e, store.name, store.email, store.phone, store.address); navigate("/")}}

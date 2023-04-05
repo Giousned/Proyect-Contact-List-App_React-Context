@@ -8,7 +8,7 @@ import useAppContext from "../store/AppContext.js";
 
 
 
-const FormAddContact = (props) => {
+const FormAddContact = () => {
 
   const navigate = useNavigate();
 
