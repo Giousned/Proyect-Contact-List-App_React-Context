@@ -1,8 +1,8 @@
 
-export const CREATE_AGENDA = (estado) => {
+export const CREATE_AGENDA = (objetoNombreAgenda) => {
     return (fetch('https://assets.breatheco.de/apis/fake/contact/', {
         method: "POST",
-        body: JSON.stringify(estado),
+        body: JSON.stringify(objetoNombreAgenda),
         headers: {
           "Content-Type": "application/json",
         }

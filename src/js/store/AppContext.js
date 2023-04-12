@@ -14,23 +14,28 @@ export const AppContextProvider = ({children}) => {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
-
-    
-    // OBJETO PARA CREAR NUEVAS AGENDAS
-    const objCrearAgenda = {
-        full_name: "Dave Bradley",
-        email: "dave@gmail.com",
-        agenda_slug: "guille_super_agenda",  // CAMBIAR AQUI PARA CREAR NUEVA AGENDA
-        address:"47568 NW 34ST, 33434 FL, USA",
-        phone:"7864445566"
-    }
-
+    const [nombreAgenda, setNombreAgenda] = useState("guille_super_agenda");
     const [contactList, setContactList] = useState([]);
 
-    // CREAR AGENDA NUEVA CON NOMBRE NUEVO, HAY QUE USAR EL OBJETO MAS ARRIBA Y PASARLE EL NOMBRE EN AGENDA_SLUG
-    // useEffect(() => CREATE_AGENDA(objCrearAgenda), [])
-    useEffect(() => {GET_All_ContactList(setContactList, "guille_super_agenda")}, [])
 
+    useEffect(() => {GET_All_ContactList(setContactList, nombreAgenda)}, [])
+
+    const Reset = () => {
+
+        setName("");
+        setEmail("");
+        setPhone("");
+        setAddress("");
+
+    }
+
+    const handleHomeAndReset = (e) => {
+
+        e.preventDefault();
+
+        Reset();
+
+    }
 
 	const handleClickSave = (e, name, email, phone, address) => {
         e.preventDefault();
@@ -38,24 +43,20 @@ export const AppContextProvider = ({children}) => {
         const newObj = {
             full_name: name,
             email: email,
-            agenda_slug: "guille_super_agenda",
+            agenda_slug: nombreAgenda,
             address: address,
             phone: phone,
         }
 
         POST_ContactList(newObj)
-            .then(() => GET_All_ContactList(setContactList, "guille_super_agenda"));
+            .then(() => {GET_All_ContactList(setContactList, nombreAgenda); Reset();});
 
-        setName("");
-        setEmail("");
-        setPhone("");
-        setAddress("");
 	}
 
     const handleClickDeleteContact = (itemID) => {
 
         DELETE_ContactList(itemID)
-            .then(() => GET_All_ContactList(setContactList, "guille_super_agenda"));
+            .then(() => GET_All_ContactList(setContactList, nombreAgenda));
 
 	}
 
@@ -65,25 +66,43 @@ export const AppContextProvider = ({children}) => {
         const newObj2 = {
             full_name: contact.name,
             email: contact.email,
-            agenda_slug: "guille_super_agenda",
+            agenda_slug: nombreAgenda,
             address: contact.address,
             phone: contact.phone,
         }
 
         UPDATE_ContactList(newObj2, id)
-            .then(() => GET_All_ContactList(setContactList, "guille_super_agenda"));
+            .then(() => {GET_All_ContactList(setContactList, nombreAgenda); Reset();});
 
-        setName("");
-        setEmail("");
-        setPhone("");
-        setAddress("");
 	}
 
     const handleBORRARAgenda = () => {
 
-        // DELETE_All_ContactList("guille_super_agenda")
+        DELETE_All_ContactList(nombreAgenda)
+            .then(() => setContactList(false))
 
     }
+
+    const handleCREARAgenda = (e, nuevaAgenda) => {
+        e.preventDefault();
+
+        setNombreAgenda(nuevaAgenda)
+
+        // OBJETO PARA CREAR NUEVAS AGENDAS
+        const objCrearAgenda = {
+            full_name: "Dave Bradley",
+            email: "dave@gmail.com",
+            agenda_slug: nombreAgenda,  // NOMBRE NUEVA AGENDA
+            address:"47568 NW 34ST, 33434 FL, USA",
+            phone:"7864445566"
+        }
+
+        CREATE_AGENDA(objCrearAgenda)
+            .then(() => GET_All_ContactList(setContactList, nombreAgenda));
+
+    }
+
+
 
     const store = {
         name,
@@ -91,6 +110,7 @@ export const AppContextProvider = ({children}) => {
         phone,
         address,
         contactList,
+        nombreAgenda,
     };
     
     const actions = {
@@ -98,10 +118,13 @@ export const AppContextProvider = ({children}) => {
         setEmail,
         setPhone,
         setAddress,
+        setNombreAgenda,
         handleClickSave,
         handleClickDeleteContact,
         handleBORRARAgenda,
         handleClickUpdate,
+        handleCREARAgenda,
+        handleHomeAndReset,
     };
 
     return (

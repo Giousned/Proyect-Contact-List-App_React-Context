@@ -70,11 +70,11 @@ const FormAddContact = () => {
         />
       </div>
       <div className="d-grid">
-        <button type="submit" className="btn btn-primary" onClick={(e) => {actions.handleClickSave(e, store.name, store.email, store.phone, store.address); navigate("/")}}>
+        <button type="submit" className="btn btn-primary" onClick={(e) => {actions.handleClickSave(e, store.name, store.email, store.phone, store.address); navigate("/");}}>
           Save
         </button>
-        <span>
-          <Link to="/">Or get back to contacts</Link>
+        <span className="link-primary text-decoration-underline" onClick={(e) => {actions.handleHomeAndReset(e); navigate("/");}}>
+          Or get back to contacts
         </span>
       </div>
     </form>
@@ -82,3 +82,6 @@ const FormAddContact = () => {
 };
 
 export default FormAddContact;
+
+
+{/* <Link to="/">Or get back to contacts</Link> */}

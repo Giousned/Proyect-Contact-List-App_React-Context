@@ -2,7 +2,7 @@ import React from "react";
 
 import { useEffect } from "react";
 
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { GET_ContactList } from "../store/services.js";
 
@@ -15,6 +15,8 @@ import ModalUpdate from "./ModalUpdate.jsx";
 const FormAddContactUpdate = () => {
   
   const {store, actions} = useAppContext();
+
+  const navigate = useNavigate();
   
   const params = useParams();
 
@@ -90,8 +92,8 @@ const FormAddContactUpdate = () => {
           Save
         </button>
         <ModalUpdate objContact={{name: store.name, email: store.email, phone: store.phone, address: store.address}} id={params.theid} />
-        <span>
-          <Link to="/">Or get back to contacts</Link>
+        <span className="link-primary text-decoration-underline" onClick={(e) => {actions.handleHomeAndReset(e); navigate("/");}}>
+          Or get back to contacts
         </span>
       </div>
     </form>
